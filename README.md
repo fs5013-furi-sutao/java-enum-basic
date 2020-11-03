@@ -111,6 +111,12 @@ enum はクラスと同じように型として扱える。変数として宣言
 ``` java
 Fruit myFavoriteFruit = Fruit.PEACH;
 Fruit myHateFruit = Fruit.APPLE;
+
+showFruit(myFavoriteFruit);
+
+public void showFruit(Fruit fruit) {
+    System.out.println(fruit);
+}
 ```
 
 つまり、enum はクラスのインスタンスと同じように扱えるものである。
