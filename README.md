@@ -100,6 +100,12 @@ boolean isBananaFruit = Fruit.BANANA instanceof Fruit;
 System.out.println(isBananaFruit);
 ```
 
+実行結果:
+
+``` output
+true
+```
+
 enum はクラスと同じように型として扱える。変数として宣言したり、enum のインスタンスを参照したりすることができる。
 
 ``` java
