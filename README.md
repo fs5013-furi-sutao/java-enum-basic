@@ -18,10 +18,10 @@ Enum の役割的にも、Enum は「要素を列挙したもの」というこ�
 
 Enum は次のような構文で宣言する。
 
-ここでは「果物」を例としたい。ファイル名は Fruit.java となる。
+ここでは「果物」を例としたい。ファイル名は FruitType.java となる。
 
-``` java title="Fruits.java
-enum Fruit {
+``` java title="FruitTypes.java
+enum FruitType {
 
     APPLE,
     ORANGE,
@@ -33,7 +33,7 @@ enum Fruit {
 
 ``` 
 
-この Enum では「果物（Fruits）は、りんご（APPLE）、みかん（ORANGE）、バナナ（BANANA）、モモ（PEACH）のいずれかである」と宣言している。
+この Enum では「果物（FruitTypes）は、りんご（APPLE）、みかん（ORANGE）、バナナ（BANANA）、モモ（PEACH）のいずれかである」と宣言している。
 
 見て分かる通り、宣言に利用されているキーワードは enum で、class ではない。つまり、Enum はクラスではない。
 
@@ -45,14 +45,14 @@ https://cr.openjdk.java.net/~iris/se/15/latestSpec/api/java.base/java/lang/Enum.
 上記で例に出した enum 宣言は、以下のクラス宣言と等価（結果が同じ）となる。
 
 ```java
-class Fruit {
-    public static final Fruit APPLE = new Fruit();
-    public static final Fruit ORANGE = new Fruit();
-    public static final Fruit BANANA = new Fruit();
-    public static final Fruit PEACH = new Fruit();
+class FruitType {
+    public static final FruitType APPLE = new FruitType();
+    public static final FruitType ORANGE = new FruitType();
+    public static final FruitType BANANA = new FruitType();
+    public static final FruitType PEACH = new FruitType();
 
     // 外部からインスタンス化できないようにする
-    private Fruit() {}
+    private FruitType() {}
 }
 ```
 
@@ -74,10 +74,10 @@ enum の値は、クラスにおける static フィールドとほぼ同じで�
 
 enum の値、すなわちインスタンスへのアクセスは、static フィールドへのアクセスと同じ「enum名. 値の名称」となる。
 
-上記で作成した Fruit の列挙子を使ってみる。
+上記で作成した FruitType の列挙子を使ってみる。
 
 ``` java
-System.out.println(Fruit.BANANA);
+System.out.println(FruitType.BANANA);
 ```
 
 実行結果:
@@ -86,18 +86,18 @@ System.out.println(Fruit.BANANA);
 BANANA
 ```
 
-もちろん、Fruit で定義したもの以外を呼び出すことはできない（コンパイルエラー）。
+もちろん、FruitType で定義したもの以外を呼び出すことはできない（コンパイルエラー）。
 
 ``` java
 // コンパイルエラー
-Fruit.GORILLA;
+FruitType.GORILLA;
 ```
 
-enum で定義した値は、Enum 自身のインスタンスである。String や Integer ではない。つまり、Fruit. BANANA は、「果物の 1 つとしてのバナナ」を表現していることになる。
+enum で定義した値は、Enum 自身のインスタンスである。String や Integer ではない。つまり、FruitType. BANANA は、「果物の 1 つとしてのバナナ」を表現していることになる。
 
 ``` java
-boolean isBananaFruit = Fruit.BANANA instanceof Fruit;
-System.out.println(isBananaFruit);
+boolean isBananaFruitType = FruitType.BANANA instanceof FruitType;
+System.out.println(isBananaFruitType);
 ```
 
 実行結果:
@@ -109,13 +109,13 @@ true
 enum はクラスと同じように型として扱える。変数として宣言したり、enum のインスタンスを参照したりすることができる。
 
 ``` java
-Fruit myFavoriteFruit = Fruit.PEACH;
-Fruit myHateFruit = Fruit.APPLE;
+FruitType myFavoriteFruitType = FruitType.PEACH;
+FruitType myHateFruitType = FruitType.APPLE;
 
-showFruit(myFavoriteFruit);
+showFruitType(myFavoriteFruitType);
 
-public void showFruit(Fruit fruit) {
-    System.out.println(fruit);
+public void showFruitType(FruitType fruitType) {
+    System.out.println(fruitType);
 }
 ```
 
@@ -131,14 +131,14 @@ Enum が通常のクラスと違う最大のポイントは「インスタンス
 
 ``` java
 // コンパイルエラー
-Fruit fruit = new Fruit();
+FruitType fruitType = new FruitType();
 ```
 
 ### Enum は、アプリの中で設定値として利用される
 
 以上の性質から、Enum はアプリの中で設定値として利用されることが多い。
 
-今回の Fruit の例では、プログラム上では、果物には「りんご」「みかん」「バナナ」「モモ」の 4 種類しか存在しないことが保証される。
+今回の FruitType の例では、プログラム上では、果物には「りんご」「みかん」「バナナ」「モモ」の 4 種類しか存在しないことが保証される。
 
 アプリで言えば、例えば会員のランクを表す列挙子として MemberRank という enum を作ったとしよう。
 
@@ -153,16 +153,16 @@ SILVER と GOLD という値を定義すれば、会員ランクには 2 種類�
 以下は、if や switch の条件判定に Enum を使うケース。
 
 ``` java
-Fruit fruit = Fruit.BANANA;
+FruitType fruitType = FruitType.BANANA;
 
-if (fruit == Fruit.BANANA) {
+if (fruitType == FruitType.BANANA) {
     System.out.println("バナナ");
 }
 ```
 
 ``` java
-Fruit fruit = Fruit.BANANA;
-switch (fruit) {
+FruitType fruitType = FruitType.BANANA;
+switch (fruitType) {
     case APPLE:
         System.out.println("りんご");
         break;
@@ -197,9 +197,9 @@ name は enum の値の名称を String として返すメソッドである。�
 name() メソッドは、enum 値（インスタンス）から呼び出す、インスタンスメソッドである。
 
 ``` java
-Fruit fruit = Fruit.BANANA;
+FruitType fruitType = FruitType.BANANA;
 
-System.out.println(fruit.name());
+System.out.println(fruitType.name());
 ```
 
 ### ordinal() メソッド
@@ -209,10 +209,10 @@ ordinal() メソッドは Enum が宣言された順番（インデックス）�
 ordinal() メソッドも、enum 値（インスタンス）から呼び出す、インスタンスメソッドである。
 
 ``` java
-System.out.println(Fruit.APPLE.ordinal());
-System.out.println(Fruit.ORANGE.ordinal());
-System.out.println(Fruit.BANANA.ordinal());
-System.out.println(Fruit.PEACH.ordinal());
+System.out.println(FruitType.APPLE.ordinal());
+System.out.println(FruitType.ORANGE.ordinal());
+System.out.println(FruitType.BANANA.ordinal());
+System.out.println(FruitType.PEACH.ordinal());
 ```
 
 実行結果:
@@ -231,8 +231,8 @@ valueOf() メソッドは文字列に対応する enum 値を返すメソッド�
 ``` java
 String fruitName = "BANANA";
 
-Fruit fruit = Fruit.valueOf(fruitName);
-System.out.println(fruit);
+FruitType fruitType = FruitType.valueOf(fruitName);
+System.out.println(fruitType);
 ```
 
 実行結果:
@@ -244,13 +244,13 @@ BANANA
 enum で定義された値に該当しない文字列を指定すると、実行時例外が発生する。
 
 ``` java
-Fruit fruit = Fruit.valueOf("DORAGON");
+FruitType fruitType = FruitType.valueOf("DORAGON");
 ```
 
 実行結果:
 
 ``` output
-java.lang.IllegalArgumentException: No enum constant Fruit.DORAGON
+java.lang.IllegalArgumentException: No enum constant FruitType.DORAGON
 ```
 
 ### values() メソッド
@@ -258,10 +258,10 @@ java.lang.IllegalArgumentException: No enum constant Fruit.DORAGON
 values() メソッドは、すべての enum 値の配列を返す static メソッドである。全ての値に対して処理を実行したい場合に利用する。
 
 ``` java
-Fruit[] fruits = Fruit.values();
+FruitType[] fruitTypes = FruitType.values();
 
-for (Fruit fruit : fruits) {
-    System.out.println(fruit);
+for (FruitType fruitType : fruitTypes) {
+    System.out.println(FruitType);
 }
 ```
 
