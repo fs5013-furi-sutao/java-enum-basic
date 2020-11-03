@@ -18,7 +18,7 @@ Enum の役割的にも、Enum は「要素を列挙したもの」というこ�
 
 Enum は次のような構文で宣言する。
 
-ここでは「果物」を例としたい。ファイル名は Fruits.java となる。
+ここでは「果物」を例としたい。ファイル名は Fruit.java となる。
 
 ``` java title="Fruits.java
 enum Fruit {
